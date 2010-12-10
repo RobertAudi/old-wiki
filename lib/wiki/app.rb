@@ -7,7 +7,6 @@ module Wiki
 
       set :root, File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
       set :app_file, __FILE__
-      set :port, 4567
 
       # NOTE: is that the right way to do it?
       # Right now `bool` can be anything, it's
@@ -50,6 +49,8 @@ module Wiki
       user = User.new
       if user.authenticate(params)
         session[:user] = user.get
+      else
+        # Tell the user to fuck off, FAILED TO LOG IN!
       end
 
       redirect '/'
@@ -61,23 +62,18 @@ module Wiki
     end
 
     post '/user/new/results/?' do
-      # Validations
-      error_messages = {}
-
-      # Thought: use Sanitize: https://github.com/rgrove/sanitize/
-
-      # params.each do |key, value|
-      #   if value.empty?
-      #     error_message = "The #{key.capitalize} cannot be empty"
-      #     break
-      #   end
-      #
-      # end
-      erb "<%= params.inspect %>"
+      # TODO: Form Validations
+      # Create a user only if there isn't one already
     end
 
     get '/user/new/?' do
       erb :"user/new"
+    end
+    
+    get '/test' do
+      # placeholder test page
+      
+      redirect '/'
     end
   end
 end
