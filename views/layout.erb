@@ -2,15 +2,50 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
     
     <title>Wiki</title>
   </head>
   <body>
     <%= yield %>
     
-    <div>
-        <h2>Params</h2>
-        <%= params.inspect %>
+    <div class="debug">
+        <ul>
+            <li>
+                <h4>User</h4>
+                <ul>
+                <% if @user.nil? %>
+                    <li><code>nil</code></li>
+                <% else %>
+                    <% @user.each do |key, value| %>
+                        <li>
+                            <code><strong><%= key %></strong>: <%= value %></code>
+                        </li>
+                    <% end %>
+                <% end %>
+                </ul>
+            </li>
+            <li>
+                <h4>Environment</h4>
+                <ul>
+                    <li><code><%= Wiki::App.environment %></code></li>
+                </ul>
+            </li>
+            <li>
+                <h4>Params</h4>
+                <ul>
+                    <li><code><%= params.inspect %></code></li>
+                </ul>
+            </li>
+            <li>
+                <h4>Environment Variables</h4>
+                <ul>
+                    <% env.each do |key, value| %>
+                        <li><code><strong><%= key %></strong>: <%= value %></code></li>
+                    <% end %>
+                </ul>
+            </li>
+        </ul>
     </div>
   </body>
 </html>
