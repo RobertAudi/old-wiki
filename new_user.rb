@@ -4,6 +4,7 @@
 # It can be used to create a new user or
 #   to change the user password.
 #
+# TODO: convert to a thor task
 # TODO: Add the -np option to just change the password
 # TODO: Enable cli options (-f, --fullname, -u, -username, -p, --password)
 # TODO: Maybe some minimal input validation (ie: username should not contain whitespace)
@@ -12,25 +13,11 @@
 
 require 'digest/sha2'
 require 'yaml'
+require 'ap' # DEBUG
 
-# DEBUG
-require 'pp'
-
-def encrypt(user_config)
-  encrypted = Digest::SHA2.new << "|[({<=-#{user_config[:salt1].reverse}--#{user_config[:id]}::#{user_config[:username]}::#{user_config[:password]}--#{user_config[:salt2].reverse}-=>})]|"
-  encrypted.to_s
-end
-
-def generate_id
-  char_list = [('a'..'z'),('A'..'Z'),(0..9)].map { |r| r.to_a }.flatten
-  id = ""
-  42.times do
-    key = rand(char_list.length)
-    id << char_list[key].to_s
-    char_list.slice!(key)
-  end
-  id
-end
+# include the Gencryptor
+require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'wiki', 'modules', 'gencryptor')
+include Wiki::Gencryptor
 
 # ------------------------------------------------------------------------------
 

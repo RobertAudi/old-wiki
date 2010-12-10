@@ -1,24 +1,27 @@
+require File.join(File.dirname(__FILE__), 'modules', 'gencryptor')
+
 module Wiki
   class User
-
+    include Wiki::Gencryptor
+    
     def get
       unless @user
-        user = YAML::load(File.open('config/user.yml'))
-        @user = user[:user]
+        @user = YAML::load(File.open('config/user.yml'))
       end
 
       @user
     end
 
     def authenticate(user = {:username => '', :password => ''})
+      return false unless user[:username] != nil && user[:password] != nil
+      
       get unless @user
-
-      user[:username] == @user[:username] && user[:password] == @user[:password]
+      
+      # the encrypt method needs the user id and the salts
+      [:id, :salt1, :salt2].each { |key| user[key] = @user[key] }
+      
+      user[:username] == @user[:username] && encrypt(user) == @user[:password]
     end
-    
-    private
-      def encrypt(user_config)
-        Digest::SHA2.new << "|[({<#{user_config['salt1'].reverse}--#{user_config['username']}::#{user_config['password']}--#{user_config['salt2'].reverse}>})]|"
-      end
+        
   end
 end
