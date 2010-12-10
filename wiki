@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Production
+# thin -p 4567 -R config.ru
+
+# Development
+shotgun --server=thin --port=4567 config.ru
