@@ -1,8 +1,5 @@
 module Wiki
-  module Gencryptor
-    # Horrible name.
-    # Module that contains methods to
-    #  generate or encrypt strings
+  module UserHelper
     
     def encrypt(user_config)
       encrypted = Digest::SHA2.new << "|[({<=-#{user_config[:salt1].reverse}--#{user_config[:id]}::#{user_config[:username]}::#{user_config[:password]}--#{user_config[:salt2].reverse}-=>})]|"

@@ -15,9 +15,9 @@ require 'digest/sha2'
 require 'yaml'
 require 'ap' # DEBUG
 
-# include the Gencryptor
-require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'wiki', 'modules', 'gencryptor')
-include Wiki::Gencryptor
+# include the User helper
+require File.join(File.expand_path(File.dirname(__FILE__)), 'lib', 'wiki', 'helpers', 'user_helper')
+include Wiki::UserHelper
 
 # ------------------------------------------------------------------------------
 

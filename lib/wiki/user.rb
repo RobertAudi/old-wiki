@@ -1,8 +1,8 @@
-require File.join(File.dirname(__FILE__), 'modules', 'gencryptor')
+require File.join(File.dirname(__FILE__), 'helpers', 'user_helper')
 
 module Wiki
   class User
-    include Wiki::Gencryptor
+    include Wiki::UserHelper
     
     def get
       unless @user
