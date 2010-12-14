@@ -7,9 +7,19 @@
     <title>Wiki</title>
   </head>
   <body>
+      <!-- This will be floated right on the top bar -->
+      <% if is_user? %>
+          <p>Hello, <%= @user[:fullname] %>.
+          <strong><a href="/logout">Log out</a></strong></p>
+      <% else %>
+          <p>Hello, Stranger.
+          <strong><a href="/login">Log in</a></strong></p>
+      <% end %>
+      
     <%= yield %>
     
     <div class="debug">
+        <a href="/">Home</a> | <a href="/test/">Test page</a>
         <ul>
             <li>
                 <h4>User</h4>
