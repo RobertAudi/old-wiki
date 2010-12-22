@@ -4,4 +4,4 @@
 # thin -p 4567 -R config.ru
 
 # Development
-shotgun --server=thin --port=4567 config.ru
+shotgun --server=thin --port=9393 config.ru

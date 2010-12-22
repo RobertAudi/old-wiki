@@ -1,0 +1,23 @@
+<form action="/edit" method="post" accept-charset="UTF-8">
+    <fieldset>
+        <input type="hidden" name="_method" value="<%= @method %>" />
+        <input type="hidden" name="path" value="<%= params[:splat][0] %>" />
+        
+        <div class="element">
+            <label for="contents">Page Contents</label>
+            <textarea name="contents" id="contents" tabindex="1"><%= @contents %></textarea>
+        </div>
+        
+        <% if index_checkbox %>
+            <p>
+                <!-- <label for="index_page">Some info on the checkbox below (and it rimes!)</label> -->
+                <label for="index_page">
+                    <input type="checkbox" name="index_page" id="index_page" value="true" tabindex="2" />
+                    Index Page?
+                </label>
+            </p>
+        <% end %>
+            
+        <p><input type="submit" value="Submit" /></p>
+    </fieldset>
+</form>

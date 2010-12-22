@@ -1,1 +1,0 @@
-- check out [sinatra-bundles](https://github.com/darkhelmet/sinatra-bundles) for awesome asset management
